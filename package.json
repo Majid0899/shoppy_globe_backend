@@ -1,0 +1,32 @@
+{
+  "name": "shoppy_globe_backend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "a ecommerce application ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Majid0899/shoppy_globe_backend.git"
+  },
+  "keywords": [
+    "products",
+    "shop",
+    "shoppy_globe",
+    "mongo",
+    "express"
+  ],
+  "author": "MajidKhan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Majid0899/shoppy_globe_backend/issues"
+  },
+  "homepage": "https://github.com/Majid0899/shoppy_globe_backend#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.17.0"
+  }
+}
