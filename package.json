@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "description": "a ecommerce application ",
-  "main": "server.js",
+  "main": "server.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node server.js"
+    "start": "nodemon server.mjs"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,9 @@
   },
   "homepage": "https://github.com/Majid0899/shoppy_globe_backend#readme",
   "dependencies": {
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "mongoose": "^8.17.0"
+    "mongoose": "^8.17.0",
+    "nodemon": "^3.1.10"
   }
 }
