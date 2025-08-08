@@ -57,5 +57,55 @@ async function handleGetProduct(req,res) {
     
 }
 
+async function handleUpdateProduct(req,res){
+    try {
+        //extract the product id from url
+        const id=req.params.id;
 
-export {handleAddProduct,handleGetAllProducts,handleGetProduct}
+        //extract the body from req
+        const data=req.body;
+
+        /**
+         * Find the product by its id
+         * Check for the product exist in database or not
+         * And update the record in database;
+         */
+        const product =await Products.findByIdAndUpdate(id,data,{
+            new:true,
+            runValidators:true
+        })
+        if(!product){
+            return res.status(404).json({error:"Product is not found"})
+        }
+        res.status(200).json(product);        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({error:"Internal Server Error"})
+    }
+    
+}
+
+async function handleDeleteProduct(req,res){
+     try {
+        //extract the product id from url
+        const id=req.params.id;
+
+        /**
+         * Find the product by its id
+         * Check for the product exist in database or not
+         * And delete the product from database;
+         */
+        const product =await Products.findByIdAndDelete(id)
+        if(!product){
+            return res.status(404).json({error:"Product is not found"})
+        }
+        res.status(200).json({product,message:"Product Deleted Successfully"});        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({error:"Internal Server Error"})
+    }
+    
+}
+
+
+export {handleAddProduct,handleGetAllProducts,handleGetProduct,handleUpdateProduct,handleDeleteProduct}
