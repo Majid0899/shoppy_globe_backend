@@ -71,7 +71,6 @@ async function handleUserProfile(req,res) {
     try {
         //extract the login user data using token verfication
         const user_data=req.user;
-
         //retreive the user from database;
         const user=await Users.findById(user_data.id);
         res.status(200).json({user})
