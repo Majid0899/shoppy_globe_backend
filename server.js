@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import { createConnection } from './db.js';
 import productRouter from './Routes/productRoute.js';
 import cartRouter from './Routes/cartRoutes.js';
+import userRouter from './Routes/userRoute.js'
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ const PORT=process.env.PORT || 5000;
 
 app.use("/products",productRouter)
 app.use("/cart",cartRouter)
+app.use("/user",userRouter)
 
 app.listen(PORT,()=>{
     console.log(`SERVER IS RUNNING ON ${PORT}`)
