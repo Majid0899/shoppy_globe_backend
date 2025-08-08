@@ -86,7 +86,7 @@ async function handleUserProfile(req,res) {
 
 async function handleChangePassword(req,res){
     try {
-        console.log("kd")
+        
 
         //extract the login user data using token verfication
         const user_data=req.user;

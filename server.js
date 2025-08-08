@@ -4,6 +4,7 @@ import { createConnection } from './db.js';
 import productRouter from './Routes/productRoute.js';
 import cartRouter from './Routes/cartRoutes.js';
 import userRouter from './Routes/userRoute.js'
+import logger from './Middlewares/logger.js'
 import { jwtAuthMiddleware } from './Middlewares/auth.js';
 
 dotenv.config();
@@ -16,6 +17,9 @@ const app=new express();
 
 /* JSON Middleware */
 app.use(express.json())
+
+/*Logger Middleware */
+app.use(logger)
 
 const PORT=process.env.PORT || 5000;
 
