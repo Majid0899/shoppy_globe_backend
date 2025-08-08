@@ -67,4 +67,51 @@ async function handleLoginUser(req, res) {
   }
 }
 
-export { handleAddUser, handleLoginUser };
+async function handleUserProfile(req,res) {
+    try {
+        //extract the login user data using token verfication
+        const user_data=req.user;
+
+        //retreive the user from database;
+        const user=await Users.findById(user_data.id);
+        res.status(200).json({user})
+
+
+    } catch (error) {
+        
+        res.status(500).json({ error: "Internal server error" });
+    }
+    
+}
+
+async function handleChangePassword(req,res){
+    try {
+        console.log("kd")
+
+        //extract the login user data using token verfication
+        const user_data=req.user;
+
+        //extract the new and old password
+        const {newPassword,oldPassword}=req.body;
+
+        //check the user is present or not
+        const user=await Users.findById(user_data.id).select('+password');
+        if(!(await user.comparePassword(oldPassword))){
+            return res.status(400).json({error:'Invalid password'})
+        }
+        /**
+         * Updat the Password
+         * Save in Database
+         */
+        user.password=newPassword;
+        await user.save();
+       
+        res.status(200).json({message:'Password updated successfully'})
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+
+export { handleAddUser, handleLoginUser,handleUserProfile,handleChangePassword };

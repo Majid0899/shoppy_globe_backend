@@ -12,21 +12,13 @@ const jwtAuthMiddleware=(req,res,next)=>{
     //Extract the token
     const token=req.headers.authorization.split(' ')[1];
 
-    
-    //For debuggin 
-    console.log(token)
 
     //verify the token
     try {
         //Verify return the payload ---which is user details
         const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY);
 
-        //Debugging
-            console.log(decoded)
-
-        req.user=decoded;
-            console.log('req.user',decoded);
-        
+        req.user=decoded;        
         next();
         
     } catch (error) {
