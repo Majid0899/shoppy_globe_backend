@@ -3,14 +3,27 @@ import Products from "../Model/Products.js";
 async function handleAddProduct(req,res){
     try {
         //extract the data from request body
-        const data=req.body;
+const {title,description,category,price,discountPercentage,rating,stock,brand,thumbnail,images}=req.body;
 
+if(!title || !description || !category || !price || !discountPercentage || !rating || !stock || !brand || !thumbnail || images.length<0){
+    return res.status(400).json({error:"Please enter All the fields title,description,category,price,discountPercentage,rating,stock,brand,thumbnail,images"})
+}
         /**
          * Create a Product
          * pass the data extracted from req.body
          * */ 
-        const product=new Products(data)
-
+        const product=new Products({
+            title,
+            description,
+            category,
+            price,
+            discountPercentage,
+            rating,
+            stock,
+            brand,
+            thumbnail,
+            images
+        })
         //save the data in database;
         const response=await product.save();
 
@@ -28,6 +41,9 @@ async function handleGetAllProducts(req,res){
     try {
         //get all the products from database;
         const product=await Products.find();
+        if(!product){
+            return res.status(404).json({error:"Not Products Found"})
+        }
         res.status(200).json({products:product})
         
     } catch (error) {
@@ -39,6 +55,7 @@ async function handleGetProduct(req,res) {
     try {
         //extract the id from url
         const id=req.params.id;
+      
 
         /**
          * Find the product by its id
@@ -64,6 +81,7 @@ async function handleUpdateProduct(req,res){
 
         //extract the body from req
         const data=req.body;
+    
 
         /**
          * Find the product by its id

@@ -22,23 +22,7 @@ const userSchema = new mongoose.Schema(
       required: [true, 'Password is required'],
       minlength: 6,
       select: false, // hides password in queries by default
-    },
-    role: {
-      type: String,
-      enum: ['user', 'admin'],
-      default: 'user',
-    },
-    phone: {
-      type: String,
-      trim: true,
-    },
-    address: {
-      street: String,
-      city: String,
-      state: String,
-      country: String,
-      zip: String,
-    },
+    }
 },
 {
     timestamps: true, // automatically adds createdAt and updatedAt fields

@@ -4,13 +4,21 @@ import { generateToken } from "../Middlewares/auth.js";
 async function handleAddUser(req, res) {
   try {
     //extract the user details from request body
-    const data = req.body;
+const{name,email,password} = req.body;
+
+if(!name || !email || !password){
+  return res.status(400).json({error:"Please enter name email and password"})
+}
 
     /**
      * Create a user
      * save in the database
      */
-    const user = new Users(data);
+    const user = new Users({
+      name,
+      email,
+      password
+    });
     const response = await user.save();
 
     /**Generate Token
@@ -20,7 +28,7 @@ async function handleAddUser(req, res) {
      */
     const payload = {
       id: response.id,
-      username: response.username,
+      username: response.name,
     };
 
     const token = generateToken(payload);
